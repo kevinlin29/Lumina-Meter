@@ -1,0 +1,27 @@
+# Xcode
+build/
+DerivedData/
+.derivedData-*/
+*.xcuserstate
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcarchive
+
+# Logs
+*.log
+.build-icon.log
+
+# Claude Code
+.claude/
+
+# macOS
+.DS_Store
+*.swp
+*~

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina — Precision Light Meter for Film Photography | iOS App</title>
+    <meta name="description" content="Lumina is a precision light meter app for iOS. Real-time zone system visualization, 5 metering modes, film stock profiles, and Metal GPU rendering. Built for film photographers.">
+    <meta name="keywords" content="light meter app, film photography, zone system, iOS light meter, exposure meter, film camera, Ansel Adams zone system, spot meter, incident meter, Sekonic alternative">
+    <meta name="author" content="Kevin Lin">
+    <meta name="theme-color" content="#0B0B0D">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lumina — Precision Light Meter for Film Photography">
+    <meta property="og:description" content="A precision light meter in your pocket. Real-time zone system, 5 metering modes, film stock profiles. Free for iOS.">
+    <meta property="og:image" content="https://kevinlin29.github.io/Lumina-Meter/assets/icon_1024.png">
+    <meta property="og:url" content="https://kevinlin29.github.io/Lumina-Meter/">
+    <meta property="og:site_name" content="Lumina Light Meter">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lumina — Precision Light Meter for Film Photography">
+    <meta name="twitter:description" content="A precision light meter in your pocket. Real-time zone system, 5 metering modes, film stock profiles.">
+    <meta name="twitter:image" content="https://kevinlin29.github.io/Lumina-Meter/assets/icon_1024.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/icon_1024.png">
+    <link rel="apple-touch-icon" href="assets/icon_1024.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://kevinlin29.github.io/Lumina-Meter/">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Lumina",
+        "description": "A precision light meter app for film photographers with real-time zone system visualization, 5 metering modes, and film stock profiles.",
+        "applicationCategory": "PhotographyApplication",
+        "operatingSystem": "iOS 18.1+",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Kevin Lin"
+        },
+        "screenshot": "https://kevinlin29.github.io/Lumina-Meter/assets/screenshots/hero.png",
+        "image": "https://kevinlin29.github.io/Lumina-Meter/assets/icon_1024.png"
+    }
+    </script>
+
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent: #E8A84C;
+            --accent-dim: rgba(232, 168, 76, 0.4);
+            --accent-bg: rgba(232, 168, 76, 0.07);
+            --accent-border: rgba(232, 168, 76, 0.2);
+            --accent-glow: rgba(232, 168, 76, 0.13);
+            --bg: #0B0B0D;
+            --chrome: #0E0E11;
+            --surface: #111113;
+            --surface-raised: #18181B;
+            --surface-border: #222226;
+            --text-primary: #F0EDE6;
+            --text-secondary: #8A857A;
+            --text-muted: #4A4740;
+            --zone-shadow: #4C7494;
+            --zone-highlight: #D4736E;
+            --zone-mid: #8C9A6C;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        /* ========== LAYOUT ========== */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 80px 24px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            width: 96px;
+            height: 96px;
+            margin-bottom: 32px;
+            border-radius: 22px;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 40px var(--accent-glow));
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 200;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 48px;
+            max-width: 460px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-store-badge {
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        .app-store-badge:hover {
+            opacity: 0.85;
+        }
+
+        .app-store-badge img {
+            height: 54px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: float 2.5s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-muted);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ========== FEATURES ========== */
+        .features {
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 24px;
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            background: var(--surface);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-border);
+            background: var(--surface-raised);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--accent-bg);
+            border: 1px solid var(--accent-border);
+            font-size: 20px;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== SCREENSHOTS ========== */
+        .screenshots {
+            border-top: 1px solid var(--surface-border);
+            overflow: hidden;
+        }
+
+        .screenshots-row {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .phone-frame {
+            width: 260px;
+            border-radius: 36px;
+            border: 3px solid var(--surface-border);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .phone-frame:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 100px rgba(0, 0, 0, 0.6), 0 0 60px var(--accent-glow);
+        }
+
+        .phone-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            aspect-ratio: 9/19.5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            letter-spacing: 1px;
+            background: var(--chrome);
+        }
+
+        /* ========== TECHNICAL ========== */
+        .technical {
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .tech-item {
+            padding: 24px;
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            background: var(--chrome);
+        }
+
+        .tech-value {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .tech-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .tech-sublabel {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ========== ZONE BAR ========== */
+        .zone-strip {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 56px;
+            padding: 24px;
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            background: var(--chrome);
+        }
+
+        .zone-cell {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--bg);
+            transition: transform 0.2s ease;
+        }
+
+        .zone-cell:hover {
+            transform: scale(1.15);
+        }
+
+        .zone-label {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 4px;
+            margin-top: 8px;
+        }
+
+        .zone-label span {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        /* ========== CTA ========== */
+        .cta {
+            text-align: center;
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .cta-heading {
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .cta-sub {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            border-top: 1px solid var(--surface-border);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            section { padding: 72px 0; }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 28px 20px;
+            }
+
+            .screenshots-row {
+                gap: 20px;
+            }
+
+            .phone-frame {
+                width: 200px;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .zone-strip {
+                gap: 4px;
+                padding: 16px;
+            }
+
+            .zone-cell {
+                width: 28px;
+                height: 28px;
+                font-size: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phone-frame {
+                width: 160px;
+                border-radius: 24px;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+        <img src="assets/icon_1024.png" alt="Lumina app icon" class="hero-icon" loading="eager">
+        <h1 class="hero-title">Lumina</h1>
+        <p class="hero-tagline">A precision light meter for film photographers</p>
+        <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+        </a>
+        <div class="scroll-indicator" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==================== FEATURES ==================== -->
+        <section class="features" id="features">
+            <div class="container">
+                <p class="section-label">Precision Metering</p>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">◉</div>
+                        <h3 class="feature-title">5 Metering Modes</h3>
+                        <p class="feature-desc">Spot, center-weighted, matrix, highlight priority, and shadow priority. Switch instantly to match any scene.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon" style="color: var(--zone-mid);">▊</div>
+                        <h3 class="feature-title">Zone System</h3>
+                        <p class="feature-desc">Real-time Ansel Adams zone mapping. Color-coded visualization from Zone 0 to Zone X, directly in the viewfinder.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">◐</div>
+                        <h3 class="feature-title">Film Stock Profiles</h3>
+                        <p class="feature-desc">Portra, Tri-X, Velvia, Ektar, and more. Latitude-aware metering adjusts highlight protection for slide vs. negative film.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SCREENSHOTS ==================== -->
+        <section class="screenshots" id="screenshots">
+            <div class="container">
+                <p class="section-label">See It In Action</p>
+                <div class="screenshots-row">
+                    <div class="phone-frame fade-in">
+                        <!-- Replace with: <img src="assets/screenshots/01_metering.png" alt="Spot metering mode"> -->
+                        <div class="screenshot-placeholder">Screenshot 1</div>
+                    </div>
+                    <div class="phone-frame fade-in">
+                        <!-- Replace with: <img src="assets/screenshots/02_zone.png" alt="Zone system visualization"> -->
+                        <div class="screenshot-placeholder">Screenshot 2</div>
+                    </div>
+                    <div class="phone-frame fade-in">
+                        <!-- Replace with: <img src="assets/screenshots/03_settings.png" alt="Film stock and settings"> -->
+                        <div class="screenshot-placeholder">Screenshot 3</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TECHNICAL ==================== -->
+        <section class="technical" id="specs">
+            <div class="container">
+                <p class="section-label">Under the Hood</p>
+                <div class="tech-grid">
+                    <div class="tech-item fade-in">
+                        <div class="tech-value mono">Metal</div>
+                        <div class="tech-label">GPU-accelerated rendering</div>
+                        <div class="tech-sublabel">Real-time camera processing</div>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-value mono">12.5 Hz</div>
+                        <div class="tech-label">Metering refresh rate</div>
+                        <div class="tech-sublabel">Smooth, responsive readings</div>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-value mono">5&times;4</div>
+                        <div class="tech-label">Matrix metering grid</div>
+                        <div class="tech-sublabel">Nikon-style 3D scene analysis</div>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-value mono">&pm;3 EV</div>
+                        <div class="tech-label">Exposure compensation</div>
+                        <div class="tech-sublabel">Third-stop precision</div>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-value">Zebra &amp; False Color</div>
+                        <div class="tech-label">Overlay visualization</div>
+                        <div class="tech-sublabel">Highlight &amp; shadow warnings</div>
+                    </div>
+                    <div class="tech-item fade-in">
+                        <div class="tech-value">Av / Tv / M</div>
+                        <div class="tech-label">Priority modes</div>
+                        <div class="tech-sublabel">Aperture, shutter, or full manual</div>
+                    </div>
+                </div>
+
+                <!-- Zone strip visualization -->
+                <div class="zone-strip fade-in">
+                    <div class="zone-cell" style="background: #1E1E2E; color: #4A4740;">0</div>
+                    <div class="zone-cell" style="background: #3A3C5C;">I</div>
+                    <div class="zone-cell" style="background: #4C5C84;">II</div>
+                    <div class="zone-cell" style="background: #4C7494;">III</div>
+                    <div class="zone-cell" style="background: #5C8A7C;">IV</div>
+                    <div class="zone-cell" style="background: #8C9A6C;">V</div>
+                    <div class="zone-cell" style="background: #B8A44C;">VI</div>
+                    <div class="zone-cell" style="background: #C4994C;">VII</div>
+                    <div class="zone-cell" style="background: #D48A4C;">VIII</div>
+                    <div class="zone-cell" style="background: #D4736E;">IX</div>
+                    <div class="zone-cell" style="background: #E8BBD0; color: #0B0B0D;">X</div>
+                </div>
+                <div class="zone-label">
+                    <span>SHADOW</span>
+                    <span>MID GRAY</span>
+                    <span>HIGHLIGHT</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CTA ==================== -->
+        <section class="cta">
+            <div class="container">
+                <h2 class="cta-heading">Meter with confidence.</h2>
+                <p class="cta-sub">Free on the App Store.</p>
+                <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <nav class="footer-links">
+            <a href="https://github.com/kevinlin29/Lumina-Meter">GitHub</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </nav>
+        <p class="footer-copy">&copy; 2025 Kevin Lin. All rights reserved.</p>
+    </footer>
+
+    <!-- ==================== SCROLL ANIMATION ==================== -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

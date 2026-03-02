@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="ringGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#F4C97A"/>
+      <stop offset="100%" stop-color="#C47F2A"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#F4C97A" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#E8A84C" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#E8A84C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="innerDot" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFF5E0" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#F4C97A" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#E8A84C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="#0B0B0D"/>
+
+  <g transform="translate(512, 512)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="360" fill="none" stroke="url(#ringGrad)" stroke-width="8"/>
+
+    <!-- 6 aperture blades forming iris with ~100px hexagonal opening -->
+    <!-- Blade geometry: each blade is a wide curved shape overlapping neighbors -->
+    <path d="M 0,-100 L -140,-280 A 300,300 0 0,1 140,-280 Z" fill="#1A1A1E" stroke="#E8A84C" stroke-opacity="0.25" stroke-width="1.5"/>
+    <path d="M 87,-50 L 280,-140 A 300,300 0 0,1 240,120 Z" fill="#1C1C20" stroke="#E8A84C" stroke-opacity="0.25" stroke-width="1.5"/>
+    <path d="M 87,50 L 240,120 A 300,300 0 0,1 100,280 Z" fill="#1A1A1E" stroke="#E8A84C" stroke-opacity="0.25" stroke-width="1.5"/>
+    <path d="M 0,100 L 100,280 A 300,300 0 0,1 -140,280 Z" fill="#1C1C20" stroke="#E8A84C" stroke-opacity="0.25" stroke-width="1.5"/>
+    <path d="M -87,50 L -280,140 A 300,300 0 0,1 -240,-120 Z" fill="#1A1A1E" stroke="#E8A84C" stroke-opacity="0.25" stroke-width="1.5"/>
+    <path d="M -87,-50 L -240,-120 A 300,300 0 0,1 -100,-280 Z" fill="#1C1C20" stroke="#E8A84C" stroke-opacity="0.25" stroke-width="1.5"/>
+
+    <!-- Center glow -->
+    <circle cx="0" cy="0" r="110" fill="url(#centerGlow)"/>
+    <!-- Bright center -->
+    <circle cx="0" cy="0" r="35" fill="url(#innerDot)"/>
+
+    <!-- Tick marks on outer ring -->
+    <line x1="0" y1="-360" x2="0" y2="-335" stroke="#E8A84C" stroke-width="3"/>
+    <g transform="rotate(30)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(60)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(90)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#E8A84C" stroke-opacity="0.5" stroke-width="2.5"/></g>
+    <g transform="rotate(120)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(150)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(180)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#E8A84C" stroke-opacity="0.5" stroke-width="2.5"/></g>
+    <g transform="rotate(210)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(240)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(270)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#E8A84C" stroke-opacity="0.5" stroke-width="2.5"/></g>
+    <g transform="rotate(300)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+    <g transform="rotate(330)"><line x1="0" y1="-360" x2="0" y2="-342" stroke="#4A4740" stroke-width="2"/></g>
+  </g>
+</svg>
