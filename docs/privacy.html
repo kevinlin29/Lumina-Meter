@@ -5,43 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — Lumina Light Meter</title>
     <meta name="description" content="Privacy policy for the Lumina light meter iOS app.">
-    <meta name="theme-color" content="#0B0B0D">
+    <meta name="theme-color" content="#FAFAF6">
     <link rel="icon" type="image/png" href="assets/icon_1024.png">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
-            background: #0B0B0D;
-            color: #F0EDE6;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: #FAFAF6;
+            color: #1C1A17;
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
-            padding: 60px 24px;
+            padding: 80px 24px 60px;
         }
         .container { max-width: 640px; margin: 0 auto; }
         h1 {
-            font-size: 28px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            font-size: 32px;
             font-weight: 300;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             margin-bottom: 8px;
+            color: #1C1A17;
         }
         .updated {
             font-size: 13px;
-            color: #4A4740;
-            margin-bottom: 40px;
+            color: #ADA89E;
+            margin-bottom: 48px;
+            font-weight: 300;
         }
         h2 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: #E8A84C;
-            margin-top: 32px;
+            color: #C48A30;
+            margin-top: 36px;
             margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
-        p { font-size: 15px; color: #8A857A; margin-bottom: 16px; }
-        a { color: #E8A84C; text-decoration: none; }
+        p { font-size: 15px; color: #6B665C; margin-bottom: 16px; font-weight: 300; line-height: 1.75; }
+        a { color: #C48A30; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        .back { display: inline-block; margin-top: 40px; font-size: 13px; color: #4A4740; }
-        .back:hover { color: #E8A84C; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 48px;
+            font-size: 13px;
+            color: #ADA89E;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+        .back:hover { color: #C48A30; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -57,6 +69,9 @@
 
         <h2>Camera Access</h2>
         <p>Lumina requires camera access to function as a light meter. Camera frames are processed in real-time on your device using Metal GPU acceleration and are never recorded, stored, or transmitted.</p>
+
+        <h2>LiDAR Access</h2>
+        <p>On supported devices, Lumina uses the LiDAR scanner to measure subject distance. Depth data is processed in real-time on your device and is never recorded, stored, or transmitted.</p>
 
         <h2>Third-Party Services</h2>
         <p>Lumina does not integrate with any third-party analytics, advertising, or data collection services.</p>
