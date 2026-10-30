@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina — Precision Light Meter for Film Photography | iOS App</title>
-    <meta name="description" content="Lumina is a precision light meter app for iOS. Real-time zone system visualization, 6 metering modes including LiDAR distance, film stock profiles, and Metal GPU rendering. Built for film photographers.">
-    <meta name="keywords" content="light meter app, film photography, zone system, iOS light meter, exposure meter, film camera, Ansel Adams zone system, spot meter, LiDAR distance meter">
-    <meta name="author" content="Kevin Lin">
-    <meta name="theme-color" content="#FAFAF6">
+    <title>Lumina — Film Inventory, Camera Library &amp; Light Meter</title>
+    <meta name="description" content="Lumina is an analog photography companion for iPhone: film inventory, camera and lens library, roll tracking, exposure logging, and an on-device light meter.">
+    <meta name="keywords" content="film inventory app, film photography, camera collection, roll tracker, light meter app, analog photography, exposure log, 35mm, 120 film">
+    <meta name="author" content="ARCTILLO LABS">
+    <meta name="theme-color" content="#F2EFE8">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Lumina — Precision Light Meter for Film Photography">
-    <meta property="og:description" content="A precision light meter in your pocket. Real-time zone system, 6 metering modes with LiDAR distance, film stock profiles. Free for iOS.">
+    <meta property="og:title" content="Lumina — Your Analog Field Companion">
+    <meta property="og:description" content="Film inventory, camera library, roll log, and an on-device light meter in one private iPhone app.">
     <meta property="og:image" content="https://kevinlin29.github.io/Lumina-Meter/assets/icon_1024.png">
     <meta property="og:url" content="https://kevinlin29.github.io/Lumina-Meter/">
-    <meta property="og:site_name" content="Lumina Light Meter">
+    <meta property="og:site_name" content="Lumina">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lumina — Precision Light Meter for Film Photography">
-    <meta name="twitter:description" content="A precision light meter in your pocket. Real-time zone system, 6 metering modes with LiDAR distance, film stock profiles.">
+    <meta name="twitter:title" content="Lumina — Your Analog Field Companion">
+    <meta name="twitter:description" content="Film inventory, camera library, roll log, and an on-device light meter in one private iPhone app.">
     <meta name="twitter:image" content="https://kevinlin29.github.io/Lumina-Meter/assets/icon_1024.png">
 
     <!-- Favicon -->
@@ -38,17 +38,17 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Lumina",
-        "description": "A precision light meter app for film photographers with real-time zone system visualization, 6 metering modes including LiDAR distance, and film stock profiles.",
+        "description": "An analog photography companion with film inventory, camera and lens library, roll tracking, exposure logging, and an on-device light meter.",
         "applicationCategory": "PhotographyApplication",
-        "operatingSystem": "iOS 18.1+",
+        "operatingSystem": "iOS 17+",
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "USD"
         },
         "author": {
-            "@type": "Person",
-            "name": "Kevin Lin"
+            "@type": "Organization",
+            "name": "ARCTILLO LABS"
         },
         "image": "https://kevinlin29.github.io/Lumina-Meter/assets/icon_1024.png"
     }
@@ -59,19 +59,19 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --accent: #C48A30;
-            --accent-warm: #D4943C;
-            --accent-light: #FBF0DC;
+            --accent: #52636C;
+            --accent-warm: #6F8089;
+            --accent-light: #E4E9EB;
             --accent-border: rgba(196, 138, 48, 0.25);
             --accent-glow: rgba(196, 138, 48, 0.08);
-            --bg: #FAFAF6;
-            --bg-warm: #F5F3ED;
-            --surface: #FFFFFF;
-            --surface-border: #E8E4DC;
+            --bg: #F2EFE8;
+            --bg-warm: #E7E8E6;
+            --surface: #FCFBF8;
+            --surface-border: #C8CDD0;
             --surface-shadow: rgba(28, 26, 23, 0.04);
-            --text-primary: #1C1A17;
-            --text-secondary: #6B665C;
-            --text-muted: #ADA89E;
+            --text-primary: #15191D;
+            --text-secondary: #5F6870;
+            --text-muted: #929AA0;
             --zone-shadow: #4C7494;
             --zone-highlight: #D4736E;
             --zone-mid: #8C9A6C;
@@ -444,9 +444,9 @@
         .distance-display {
             width: 320px;
             height: 380px;
-            background: #0F0F12;
+            background: #090A0C;
             border-radius: 24px;
-            border: 1px solid #2A2A30;
+            border: 1px solid #2B3339;
             position: relative;
             overflow: hidden;
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
@@ -459,7 +459,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(180deg, #13131A 0%, #1A1A24 50%, #13131A 100%);
+            background: linear-gradient(180deg, #0E1114 0%, #15191D 50%, #0E1114 100%);
         }
 
         /* Crosshair reticle */
@@ -718,8 +718,8 @@
             transform: scale(1.15);
         }
 
-        .zone-cell:first-child { color: #6B665C; }
-        .zone-cell:last-child { color: #1C1A17; }
+        .zone-cell:first-child { color: #5F6870; }
+        .zone-cell:last-child { color: #15191D; }
 
         .zone-label {
             display: flex;
@@ -889,8 +889,9 @@
         </a>
         <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="#lidar">LiDAR</a>
+            <a href="#lidar">Meter</a>
             <a href="#specs">Specs</a>
+            <a href="support.html">Support</a>
             <a href="privacy.html">Privacy</a>
         </div>
     </nav>
@@ -899,8 +900,8 @@
     <header class="hero">
         <img src="assets/icon_1024.png" alt="Lumina app icon" class="hero-icon" loading="eager">
         <h1 class="hero-title serif">Lumina</h1>
-        <p class="hero-tagline">A precision light meter for film photographers</p>
-        <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+        <p class="hero-tagline">Film inventory, camera library, roll log, and an on-device meter</p>
+        <a href="https://apps.apple.com/app/id6758922305" class="app-store-badge" aria-label="Download on the App Store">
             <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
         </a>
         <div class="scroll-indicator" aria-hidden="true">
@@ -914,23 +915,23 @@
         <!-- ==================== FEATURES ==================== -->
         <section class="features" id="features">
             <div class="container">
-                <p class="section-label">Precision Metering</p>
-                <h2 class="section-heading serif">Every mode you need, nothing you don't</h2>
+                <p class="section-label">The Complete Analog Workflow</p>
+                <h2 class="section-heading serif">From the film fridge to the final frame</h2>
                 <div class="features-grid">
                     <div class="feature-card fade-in">
                         <div class="feature-icon">&#9673;</div>
-                        <h3 class="feature-title">6 Metering Modes</h3>
-                        <p class="feature-desc">Spot, center-weighted, matrix, highlight priority, shadow priority, and LiDAR distance. Switch instantly to match any scene.</p>
+                        <h3 class="feature-title">Film Inventory</h3>
+                        <p class="feature-desc">Track stock, format, quantity, expiration, batch, storage, and cost. Follow every roll from loaded through archived.</p>
                     </div>
                     <div class="feature-card fade-in fade-in-delay-1">
                         <div class="feature-icon" style="color: var(--zone-mid);">&#9610;</div>
-                        <h3 class="feature-title">Zone System</h3>
-                        <p class="feature-desc">Real-time Ansel Adams zone mapping. Color-coded visualization from Zone 0 to Zone X, directly in the viewfinder.</p>
+                        <h3 class="feature-title">Camera Library</h3>
+                        <p class="feature-desc">Catalog bodies and lenses with photos, serials, condition, values, loaded film, and complete service history.</p>
                     </div>
                     <div class="feature-card fade-in fade-in-delay-2">
                         <div class="feature-icon">&#9680;</div>
-                        <h3 class="feature-title">Film Stock Profiles</h3>
-                        <p class="feature-desc">Portra, Tri-X, Velvia, Ektar, and more. Latitude-aware metering adjusts highlight protection for slide vs. negative film.</p>
+                        <h3 class="feature-title">Connected Light Meter</h3>
+                        <p class="feature-desc">The loaded roll configures ISO and calibration. Meter with live exposure tools, then save the reading to the next frame.</p>
                     </div>
                 </div>
             </div>
@@ -950,8 +951,8 @@
                         </div>
                         <h2 class="lidar-title serif">Know exactly how far your subject is</h2>
                         <p class="lidar-desc">
-                            On Pro iPhones, Lumina uses the built-in LiDAR scanner to measure real-time distance to your subject.
-                            See precise depth readings right in the viewfinder — invaluable for zone focusing,
+                            On compatible LiDAR-equipped iPhones, Lumina uses the built-in scanner to measure real-time distance to your subject. In version 2.2 and later, this requires Lumina Pro access.
+                            See live depth readings right in the viewfinder — invaluable for zone focusing,
                             hyperfocal calculations, and nailing critical focus on manual lenses.
                         </p>
                         <div class="lidar-specs">
@@ -1022,7 +1023,7 @@
         <section class="technical" id="specs">
             <div class="container">
                 <p class="section-label">Under the Hood</p>
-                <h2 class="section-heading serif">Built for precision</h2>
+                <h2 class="section-heading serif">Built for the field</h2>
                 <div class="tech-grid">
                     <div class="tech-item fade-in">
                         <div class="tech-value">Metal</div>
@@ -1042,7 +1043,7 @@
                     <div class="tech-item fade-in">
                         <div class="tech-value">&pm;3 EV</div>
                         <div class="tech-label">Exposure compensation</div>
-                        <div class="tech-sublabel">Third-stop precision</div>
+                        <div class="tech-sublabel">Third-stop controls</div>
                     </div>
                     <div class="tech-item fade-in fade-in-delay-1">
                         <div class="tech-value">Zebra &amp; False Color</div>
@@ -1085,8 +1086,8 @@
         <section class="cta">
             <div class="container">
                 <h2 class="cta-heading serif">Meter with <em>confidence</em>.</h2>
-                <p class="cta-sub">Free for a limited time on the App Store.</p>
-                <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+                <p class="cta-sub">Free meter and collection tools. Optional one-time Lumina Pro upgrade in 2.2. No tracking or subscription.</p>
+                <a href="https://apps.apple.com/app/id6758922305" class="app-store-badge" aria-label="Download on the App Store">
                     <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
                 </a>
             </div>
@@ -1099,7 +1100,7 @@
             <a href="https://github.com/kevinlin29/Lumina-Meter">GitHub</a>
             <a href="privacy.html">Privacy Policy</a>
         </nav>
-        <p class="footer-copy">&copy; 2026 Kevin Lin. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 ARCTILLO LABS. All rights reserved.</p>
     </footer>
 
     <!-- ==================== SCROLL ANIMATION ==================== -->
